@@ -28,7 +28,7 @@
             <label for="image" class="shrink w-2/12">Image</label>
             @if ($draft->image_url != null)
             <div class="w-10/12 flex flex-col space-y-2">
-              <img class="object-cover w-80 h-48 rounded" src="{{ Storage::disk('s3')->temporaryUrl($draft->image_url, '+2 minutes') }}" alt="img-placeholder">
+              <img class="object-cover w-80 h-48 rounded" src="{{ Storage::disk('local')->url($draft->image_url, '+2 minutes') }}" alt="img-placeholder">
               <input type="file" accept="image/*" name="image" id="image" class="bg-gray-100 border-2 rounded py-1 px-2 @error('image') border-red-500 @enderror">
             </div>
             @else

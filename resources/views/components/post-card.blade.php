@@ -2,7 +2,7 @@
 
 <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md">
   <a href="{{ route('post.detail', $post->id) }}">
-      <img class="h-48 w-full rounded-t-lg" src="{{ ($post->image_url) ? Storage::disk('s3')->temporaryUrl($post->image_url, '+2 minutes') : "#" }}" alt="" />
+      <img class="h-48 w-full rounded-t-lg" src="{{ ($post->image_url) ? Storage::disk('local')->url($post->image_url, '+2 minutes') : "#" }}" alt="" />
   </a>
   <div class="p-5">
       <div class="flex space-x-2 items-center mb-4 md:text-sm md:space-x-1">
@@ -26,12 +26,12 @@
               <i class="far fa-clock"></i>
               <span>{{ $post->preparation_time + $post->cooking_time}} {{ Str::plural('min', $post->cooking_time+$post->preparation_time) }}</span>
           </div>
+          {{-- @php
+              dd($post);
+          @endphp --}}
           <div class="text-yellow-400">
               <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              {{ $post->review }}
           </div>
       </div>
   </div>

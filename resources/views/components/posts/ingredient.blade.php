@@ -9,6 +9,7 @@
           {{-- <th scope="col" class="px-6 py-3"></th> --}}
           <th scope="col" class="px-6 py-3">Ingredient</th>
           <th scope="col" class="px-6 py-3">Amount</th>
+          <th scope="col" class="px-6 py-3">Unit</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@
           {{-- <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"><i class="fas fa-flask"></i></th> --}}
           <td class="px-6 py-4"><span>{{json_decode($ingredient)->name}}</span></td>
           <td class="px-6 py-4"><span>{{json_decode($ingredient)->amount}}</span></td>
+          <td class="px-6 py-4"><span>{{@json_decode($ingredient)->unit}}</span></td>
         </tr>
       @endforeach
       </tbody>

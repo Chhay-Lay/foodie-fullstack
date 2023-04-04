@@ -8,7 +8,7 @@
           @csrf
           <div class="flex items-center space-x-4 p-6 border-t">
             <label for="title" class="shrink w-2/12">Recipe Title</label>
-            <input type="text" name="title" id="title" class="bg-gray-100 border-2 w-10/12 rounded py-1 px-2 @error('title') border-red-500 @enderror" placeholder="What do you call this recipe?" value="{{ old('title') }}">
+            <input type="text" name="title" id="title" class="bg-gray-100 border-2 w-10/12 rounded py-1 px-2 @error('title') border-red-500 @enderror" placeholder="What do you call this recipe?" value="{{ old('title') }}" required>
           </div>
           @error('title')
             <div class="text-red-500 text-center px-6">
@@ -17,7 +17,7 @@
           @enderror
           <div class="flex items-start space-x-4 mt-4 p-6 border-t">
             <label for="description" class="shrink w-2/12">Description</label>
-            <textarea name="description" id="description" cols="30" rows="5" class="bg-gray-100 border-2 w-10/12 rounded py-1 px-2 @error('description') border-red-500 @enderror" value="{{ old('description') }}"></textarea>
+            <textarea name="description" id="description" cols="30" rows="5" class="bg-gray-100 border-2 w-10/12 rounded py-1 px-2 @error('description') border-red-500 @enderror" value="{{ old('description') }}" required></textarea>
           </div>
           @error('description')
             <div class="text-red-500 text-center px-6">
@@ -27,7 +27,7 @@
           <div class="flex items-start space-x-4 mt-4 p-6 border-t">
             <label for="image" class="shrink w-2/12">Image</label>
             <div class="w-10/12 flex flex-col space-y-2">
-              <input type="file" accept="image/*" name="image" id="image" class="bg-gray-100 border-2 rounded py-1 px-2 @error('image') border-red-500 @enderror"  >
+              <input required type="file" accept="image/*" name="image" id="image" class="bg-gray-100 border-2 rounded py-1 px-2 @error('image') border-red-500 @enderror">
               <div class="pl-2 text-slate-500">
                 <div>Maximum size:</div>
                 <div>Max file size:</div>
@@ -48,7 +48,7 @@
             <div class="w-10/12 grid grid-rows-4 grid-flow-col gap-4">
               @foreach ($categories as $category)
                 <div class="flex items-center mr-4">
-                  <input id="category-{{ $loop->index }}" name="categories[{{ $loop->index }}]" type="checkbox" value="{{ $category->id }}" class="w-4 h-4 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 focus:ring-2">
+                  <input id="category-{{ $loop->index }}" name="categories" type="radio" value="{{ $category->id }}" class="w-4 h-4 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 focus:ring-2" required checked>
                   <label for="category-{{ $loop->index }}" class="ml-2 text-sm font-medium text-gray-900"> {{ $category->section }} </label>
                 </div>
               @endforeach
@@ -63,7 +63,7 @@
             <p class="shrink w-2/12">Flavour</p>
             <div class="w-10/12 grid grid-rows-4 grid-flow-col gap-4">
               <div class="flex items-center mr-4">
-                <input id="flavour-1" name="flavours[0]" type="checkbox" value="sweet" class="w-4 h-4 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 focus:ring-2">
+                <input id="flavour-1" name="flavours[0]" type="checkbox" value="sweet" class="w-4 h-4 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500 focus:ring-2" required>
                 <label for="flavour-1" class="ml-2 text-sm font-medium text-gray-900">Sweet</label>
               </div>
               <div class="flex items-center mr-4">
@@ -88,12 +88,13 @@
             <p class="shrink w-2/12">Ingredients</p>
             <div class="w-10/12 px-2">
               <div id="ingredient-wrapper">
-                <table class="table-auto" id="dynamic_field"> 
-                  <tr>  
-                    <td><input type="text" name="ingredients[0][name]" placeholder="Ingredient name" class="border-2 p-1 mr-2 mb-2 rounded-md"/></td>  
-                    <td><input type="text" name="ingredients[0][amount]" placeholder="Amount" class="border-2 p-1 mb-2 rounded-md"/></td>  
-                  </tr>  
-                </table>  
+                <div class="table-auto flex flex-col" id="dynamic_field">
+                  <div class="flex">
+                    <input type="text" name="ingredients[0][name]" placeholder="Ingredient name" class="border-2 p-1 mr-2 mb-2 rounded-md" required/>
+                    <input type="text" name="ingredients[0][amount]" placeholder="Amount" class="border-2 p-1 mb-2 mr-2 rounded-md w-32" required/>
+                    <input type="text" name="ingredients[0][unit]" placeholder="Unit" class="border-2 p-1 mb-2 rounded-md w-32" required/>
+                  </div>
+                </div>
               </div>
               <button id="add" type="button" class="mt-4 bg-blue-200 rounded py-2 px-4">Add ingredient</button>
             </div>

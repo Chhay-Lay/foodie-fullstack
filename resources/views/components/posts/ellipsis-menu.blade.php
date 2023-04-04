@@ -5,7 +5,10 @@
   <!-- Dropdown menu -->
   <div id="{{ $toggle_id }}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded drop-shadow-md w-44">
       <ul class="py-1 text-sm text-gray-700" aria-labelledby="{{ $id }}">
-        @if ($post->ownedBy(auth()->user()))
+        @php
+          // dd(auth()->user()->isAdmin);
+        @endphp
+        @if ($post->ownedBy(auth()->user()) || auth()->user()->isAdmin)
           <li>
             <form action="{{ route('post.delete', $post->id) }}" method="POST"  class="block px-4 py-2 hover:bg-gray-100">
               @csrf

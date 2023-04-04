@@ -56,9 +56,9 @@ class PostController extends Controller
         if ($request->input('action') == 'Post') {
             $this->validate($request, [
                 'title'=>'required|string',
-                'description'=>'required|string',
+                'description'=>'required',
                 'image'=>'required|image',
-                'categories'=>'required|array',
+                'categories'=>'required',
                 'flavours'=>'required|array',
                 'ingredients'=>'required|array',
                 'ingredients.*.name' => 'required|max:255',
@@ -66,12 +66,13 @@ class PostController extends Controller
                 'directions'=>'required|string',
             ]);
         }
-        
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = time() . '-' . $file->getClientOriginalName();
-            $imagePath = 'images/' . $name;
-            Storage::disk('s3')->put($imagePath, file_get_contents($file));
+            $imagePath = 'public/images/' . $name;
+            Storage::disk('local')->put($imagePath, file_get_contents($file));
+            // dd(Storage::disk('local')->url($imagePath));
         }
 
         $ingredients = $request->ingredients;
@@ -84,7 +85,7 @@ class PostController extends Controller
             'description' => $request->description,
             'image_url' => isset($imagePath) ? $imagePath : $request->image,
             'video_url' => $request->video_url,
-            'category_id' => ($request->input('action') == 'Post') ? array_values($request->categories) : $request->category_id,
+            'category_id' => ($request->input('action') == 'Post') ? array_values((array) $request->categories) : $request->category_id,
             'flavours' => ($request->input('action') == 'Post') ? array_values($request->flavours) : $request->flavours,
             'ingredients' => json_encode($ingredients),
             'directions' => $request->directions,
@@ -115,8 +116,8 @@ class PostController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = time() . '-' . $file->getClientOriginalName();
-            $imagePath = 'images/' . $name;
-            Storage::disk('s3')->put($imagePath, file_get_contents($file));
+            $imagePath = 'public/images/' . $name;
+            Storage::disk('local')->put($imagePath, file_get_contents($file));
         } else {
             $imagePath = $draft->image_url;
         }
@@ -193,12 +194,12 @@ class PostController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = time() . '-' . $file->getClientOriginalName();
-            $imagePath = 'images/' . $name;
-            Storage::disk('s3')->put($imagePath, file_get_contents($file));
+            $imagePath = 'public/images/' . $name;
+            Storage::disk('local')->put($imagePath, file_get_contents($file));
 
             // Remove old image
-            if (Storage::disk('s3')->exists(public_path($post->image_url))) {
-                Storage::disk('s3')->delete($post->image_url);
+            if (Storage::disk('local')->exists(public_path($post->image_url))) {
+                Storage::disk('local')->delete($post->image_url);
             }
         } else {
             $imagePath = $post->image_url;
@@ -234,9 +235,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        Storage::disk('s3')->delete($post->image_url); 
+        Storage::disk('local')->delete($post->image_url); 
         $post->delete();
-        return back();
+        return redirect('/');
     }
 
     public function showReport(Post $post)

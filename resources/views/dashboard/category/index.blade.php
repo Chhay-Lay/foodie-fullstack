@@ -51,6 +51,11 @@
               {{ $category->updated_at->diffForHumans() }}
             </td>
             <td class="py-2">
+              @if($errors->any())
+              <script>
+                alert('{{ $errors->all()[0] }}');
+              </script>
+              @endif
               <div class="flex justify-center space-x-4">
                 <a href="{{ route('dashboard.category.edit', $category->id) }}" class="focus:outline-none text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Edit</a>
                 <form action="{{ route('dashboard.category.remove', $category->id) }}" method="POST">
@@ -58,7 +63,7 @@
                   @method('DELETE')
                   <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
                 </form>
-            </div>
+              </div>
             </td>
           </tr>
           @endforeach

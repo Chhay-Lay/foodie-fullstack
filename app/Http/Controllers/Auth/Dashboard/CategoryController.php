@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
-
-
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -68,7 +68,13 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $post = DB::table('posts')->whereJsonContains('category_id', $id)->first();
+        
+        if($post){
+            return back()->withErrors('Cannot delete category when post exist!');
+        } 
+
         Category::destroy($id);
         return back();
     }

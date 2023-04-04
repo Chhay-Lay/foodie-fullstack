@@ -1,7 +1,7 @@
 @props(['post', 'ingredients'])
 
 <div class="shadow-md p-2 rounded">
-  <img class="object-cover w-full h-96" src="{{ ($post->image_url) ? Storage::disk('s3')->temporaryUrl($post->image_url, '+2 minutes') : '#' }}" alt="">
+  <img class="object-cover w-full h-96" src="{{ ($post->image_url) ? Storage::disk('local')->url($post->image_url, '+2 minutes') : '#' }}" alt="">
   <div class="flex flex-col items-center bg-green-50 p-4">
     <div class="text-xl font-bold mb-2">{{ $post->title}}</div>
     <div class="text-center">{{ $post->description }}</div>

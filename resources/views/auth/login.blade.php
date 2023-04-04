@@ -33,7 +33,7 @@
           <a href="{{ route('password.request') }}" class="text-blue-500 hover:underline">Forgot your password?</a>
         </div>
         <button type="submit" class="bg-green-500 font-bold text-white text-xl uppercase p-4 w-full rounded shadow-md mb-4">Login</button>
-        <div class="flex justify-center text-gray-600 mb-4">
+        {{-- <div class="flex justify-center text-gray-600 mb-4">
           or connect with
         </div>
         <button type="button" class="bg-blue-500 font-bold text-white text-xl uppercase p-4 w-full rounded shadow-md">
@@ -41,7 +41,7 @@
             <i class="fab fa-facebook-square"></i>
             <span class="ml-2">Facebook</span>
           </a>
-        </button>
+        </button> --}}
       </form>
     </div>
   </div>

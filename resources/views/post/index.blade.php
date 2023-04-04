@@ -37,7 +37,7 @@
           </div>
           <div class="w-full">
             <a href="{{ route('post.detail', $post->id) }}">
-              <img class="object-cover w-full h-96 rounded" src="{{ Storage::disk('s3')->temporaryUrl($post->image_url, '+2 minutes') }}" alt="img-placeholder">
+              <img class="object-cover w-full h-96 rounded" src="{{ Storage::disk('local')->url($post->image_url, '+2 minutes') }}" alt="img-placeholder">
             </a>
           </div>
           <div class="flex space-x-4 mt-4">

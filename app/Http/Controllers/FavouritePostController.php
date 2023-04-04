@@ -36,6 +36,8 @@ class FavouritePostController extends Controller
                 'post_id' => $post_id,
             ]);
         }
+
+        return back();
     }
 
     /**

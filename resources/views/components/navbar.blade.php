@@ -20,13 +20,13 @@
           <a href="{{ route('dashboard') }}">Dashboard</a>
       @endcan
 
-        <button id="notify-bell" data-dropdown-toggle="notify-dropdown" type="button"><i class="far fa-bell"></i></button>
+        {{-- <button id="notify-bell" data-dropdown-toggle="notify-dropdown" type="button"><i class="far fa-bell"></i></button> --}}
         <!-- Dropdown menu -->
-        <div id="notify-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow">
+        {{-- <div id="notify-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow">
             <p class="p-2 text-sm">Notification list: </p>
             <ul class="p-3 text-sm text-gray-700 space-y-4" id="notify-body" aria-labelledby="notify-bell">
             </ul>
-        </div>
+        </div> --}}
 
       <a href="{{ route('profile') }}"> {{ auth()->user()->name }} <span id="notification_counter"></span></a>
       <div>
