@@ -63,7 +63,7 @@ class UserSettingController extends Controller
             if (Hash::check($request->old_password, $user->password)) {
                 $user->update([
                     'name' => $request->name,
-                    'password' => $request->new_password,
+                    'password' => Hash::make($request->new_password),
                 ]);
                 return redirect()->back()->with('alert', 'Your password is changed successfully');
             }else{

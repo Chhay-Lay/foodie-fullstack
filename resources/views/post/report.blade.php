@@ -3,7 +3,7 @@
 @section('content')
     <div class="p-6 h-screen flex flex-col items-center w-full py-8 px-20">
       <div class=" w-8/12 p-4 mb-4 bg-white text-lg rounded">
-        Report Post
+        Report Post ({{$post->title}})
       </div>
       <form action="{{ route('report.create', $post) }}" method="POST" class="w-8/12">
         @csrf

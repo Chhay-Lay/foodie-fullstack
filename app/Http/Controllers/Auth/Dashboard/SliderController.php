@@ -11,7 +11,7 @@ class SliderController extends Controller
 {
     public function index()
     {
-        $slides = Slider::paginate(4);
+        $slides = Slider::paginate(5);
         return view('dashboard.slider.index', [
             'slides' => $slides,
         ]);
