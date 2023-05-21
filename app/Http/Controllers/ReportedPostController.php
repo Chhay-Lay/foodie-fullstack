@@ -72,6 +72,12 @@ class ReportedPostController extends Controller
 
         $report = ReportedPost::find($id);
         $report->is_accepted = $request->is_accepted;
+
+        if($request->is_accepted == 1)
+        {
+            Post::find($report['post_id'])->delete();
+        }
+
         $report->save();
 
         return back();

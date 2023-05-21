@@ -13,11 +13,11 @@
           <div class="flex space-x-4 items-center">
             <i class="fas fa-exclamation-circle text-2xl"></i>
             <div>
-              <a href="{{ route('post.detail', $reportedPost->post_id) }}" target="_blank" class="font-semibold text-lg hover:text-blue-500">{{ App\Models\Post::find($reportedPost->post_id)->title }} <span class="text-sm text-gray-600">reported by {{ App\Models\User::find($reportedPost->user_id)->name}}</span></a>
+              <a href="{{ route('post.detail', $reportedPost->post_id) }}" target="_blank" class="font-semibold text-lg hover:text-blue-500">{{ App\Models\Post::where('id', $reportedPost->post_id)->withTrashed()->first()->title }} <span class="text-sm text-gray-600">reported by {{ App\Models\User::find($reportedPost->user_id)->name}}</span></a>
               <p>{{ $reportedPost->body}}</p>
             </div>
           </div>
-          @if($reportedPost->is_accepted)
+          @if(!is_null($reportedPost->is_accepted))
             <button button type="button" disabled class="{{ ($reportedPost->is_accepted ? "bg-green-400" : "bg-red-400") }} p-3 rounded-lg">{{ $reportedPost->is_accepted === 1 ? "Accepted" : "Rejected" }}</button>
           @else
             @if(auth()->user()->is_admin === 1)
