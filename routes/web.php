@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/post/report/{post}', [ReportedPostController::class, 'index'])->name('post.report');
     Route::post('/post/report/{post}', [ReportedPostController::class, 'store'])->name('report.create');
-    Route::delete('/post/report/{report}', [ReportedPostController::class, 'destroy'])->name('report.destroy');
+    Route::put('/post/report/{report}', [ReportedPostController::class, 'updateReportStatus'])->name('report.updateReportStatus');
 
     //Comment Section
     Route::post('/post/detail/{post}/comment', [RatingAndCommentController::class, 'store'])->name('comment.create');
@@ -85,6 +85,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile/setting', [UserSettingController::class, 'index'])->name('profile.setting');
     Route::put('/profile/setting', [UserSettingController::class, 'update'])->name('profile.setting.update');
 
+    Route::get('/profile/reported_post', [UserSettingController::class, 'getReportedPosts'])->name('profile.reported_post');
     // Favourite Post
     Route::get('/profile/save_post', [FavouritePostController::class, 'index'])->name('profile.save_post');
     Route::post('/post/{id}/favourite', [FavouritePostController::class, 'store'])->name('add.favourite');

@@ -64,9 +64,17 @@ class ReportedPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateReportStatus(Request $request, $id)
     {
-        //
+        $request->validate([
+            'is_accepted' => 'required|boolean'
+        ]);
+
+        $report = ReportedPost::find($id);
+        $report->is_accepted = $request->is_accepted;
+        $report->save();
+
+        return back();
     }
 
     /**
@@ -75,9 +83,9 @@ class ReportedPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReportedPost $report)
-    {
-        $report->delete();
-        return back();
-    }
+    // public function destroy(ReportedPost $report)
+    // {
+    //     $report->delete();
+    //     return back();
+    // }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReportedPost;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +18,13 @@ class UserSettingController extends Controller
     public function index()
     {
         return view('auth.profile.setting');
+    }
+
+    public function getReportedPosts()
+    {
+        $reportedPosts = ReportedPost::where('user_id', auth()->user()->id)->get();
+
+        return view('auth.profile.reportedPost', ['reportedPosts' => $reportedPosts]);
     }
 
     /**

@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $reports = ReportedPost::get();
+        $reports = ReportedPost::orderBy('is_accepted', 'ASC')->get();
         return view('dashboard.index', [
             'reports' => $reports
         ]);

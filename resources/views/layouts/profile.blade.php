@@ -33,6 +33,12 @@
           </a>
         </li>
         <li>
+          <a href="{{ route('profile.reported_post') }}" class="p-2 text-base font-normal text-gray-900 hover:text-blue-500">
+            <i class="fas fa-flag"></i>
+            <span class="ml-2">Reported Post</span>
+          </a>
+        </li>
+        <li>
           <a href="{{ route('profile.save_post') }}" class="p-2 text-base font-normal text-gray-900 hover:text-blue-500">
             <i class="fas fa-bookmark"></i>
             <span class="ml-2">Saved Post</span>
