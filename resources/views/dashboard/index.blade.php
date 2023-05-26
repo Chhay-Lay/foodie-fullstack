@@ -25,7 +25,7 @@
               @csrf
               @method('PUT')
               <button type="submit" name="is_accepted" value="0" onclick="return confirm('Are you sure to reject?')" class="bg-red-400 p-3 rounded-lg">Reject</button>
-              <button type="submit" name="is_accepted" value="1" onclick="return confirm('Are you sure to accept?')" class="bg-green-400 p-3 rounded-lg">Accept</button>
+              <button type="submit" name="is_accepted" value="1" onclick="return confirm('Are you sure to accept that will delete the post?')" class="bg-green-400 p-3 rounded-lg">Accept</button>
             </form>
           @else
             <button type="button" disabled class="bg-orange-400 p-3 rounded-lg">Pending</button>
